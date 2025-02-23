@@ -744,7 +744,7 @@ class XrplApi {
         if (txResponse?.validated) {
             // Deal with transactions getting queued when ledgers are full, we need to wait until it has been procceed for a result.
             if (txResponse?.meta?.TransactionResult === 'terQUEUED') {
-                return this.getTransactionValidatedResults(txHash);
+                return await this.getTransactionValidatedResults(txHash);
             }
 
             return {
