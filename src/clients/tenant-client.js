@@ -8,7 +8,7 @@ const { EvernodeHelpers } = require('../evernode-helpers');
 const { TransactionHelper } = require('../transaction-helper');
 const { XrplConstants } = require('../xrpl-common');
 
-const DEFAULT_WAIT_TIMEOUT = 600000;
+const DEFAULT_WAIT_TIMEOUT = 3600000;
 
 /**
  * Following tenant-specific events can be subscribed from Evernode client instances.
