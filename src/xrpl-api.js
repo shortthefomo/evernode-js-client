@@ -735,16 +735,16 @@ class XrplApi {
      * @param {string} txHash - Hash of the transaction to check.
      * @returns Validated results of the transaction.
      */
-    async getTransactionValidatedResults(txHash) {
+    async getTransactionValidatedResults(txHash, attempt = 0) {
         const txResponse = await this.getTxnInfo(txHash)
             .catch((e) => {
                 return null;
             });
 
-        if (txResponse?.validated) {
+        if (txResponse?.validated && attempt < 10) {
             // Deal with transactions getting queued when ledgers are full, we need to wait until it has been procceed for a result.
             if (txResponse?.meta?.TransactionResult === 'terQUEUED') {
-                return await this.getTransactionValidatedResults(txHash);
+                return await this.getTransactionValidatedResults(txHash, attempt + 1);
             }
 
             return {
